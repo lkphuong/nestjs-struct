@@ -1,4 +1,4 @@
-export type HttpNoneResponse = {
+export type IHttpNoneResponse = {
   error_code: number;
   message: string | null;
   errors:

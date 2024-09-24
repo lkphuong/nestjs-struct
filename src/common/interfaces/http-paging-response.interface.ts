@@ -1,6 +1,6 @@
-import { HttpNoneResponse } from './http-none-response.interface';
+import { IHttpNoneResponse } from './http-none-response.interface';
 
-export type HttpPagingResponse<T> = HttpNoneResponse & {
+export type IHttpPagingResponse<T> = IHttpNoneResponse & {
   data: {
     pages?: number;
     page: number;

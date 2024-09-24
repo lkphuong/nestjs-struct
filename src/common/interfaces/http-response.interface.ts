@@ -1,5 +1,5 @@
-import { HttpNoneResponse } from './http-none-response.interface';
+import { IHttpNoneResponse } from './http-none-response.interface';
 
-export type HttpResponse<T> = HttpNoneResponse & {
+export type IHttpResponse<T> = IHttpNoneResponse & {
   data: T[] | T | null;
 };

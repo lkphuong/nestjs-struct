@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { generateValidationMessage } from '@utils/index';
-import { MinValidator } from '@validators/min.validator';
+import { MinValidator } from 'src/common/validators/min.validator';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 

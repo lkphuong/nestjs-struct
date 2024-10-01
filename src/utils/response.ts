@@ -1,14 +1,14 @@
 import { UNKNOW_EXIT_CODE } from '@constants/enums/error-code.enum';
 import { BaseErrorMassage } from '@constants/enums/error-message.enum';
-import { HttpPagingResponse } from '@interfaces/http-paging-response.interface';
-import { HttpResponse } from '@interfaces/http-response.interface';
+import { IHttpPagingResponse } from '@interfaces/http-paging-response.interface';
+import { IHttpResponse } from '@interfaces/http-response.interface';
 
 export const returnObjects = <T>(
   data: T | T[] | null,
   errorCode?: number,
   message?: string | null,
   errors?: [{ [key: string]: string }] | null,
-): HttpResponse<T> => {
+): IHttpResponse<T> => {
   return {
     data: data,
     error_code: data != null ? 0 : errorCode ?? 0,
@@ -22,10 +22,8 @@ export const returnObjectsWithPaging = <T>(
   pages: number,
   page: number,
   data: T | T[] | null,
-  errorCode?: number,
-  message?: string | null,
   errors?: [{ [key: string]: string }] | null,
-): HttpPagingResponse<T> => {
+): IHttpPagingResponse<T> => {
   return {
     data: {
       pages,

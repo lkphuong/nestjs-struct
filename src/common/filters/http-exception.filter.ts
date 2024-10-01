@@ -1,4 +1,4 @@
-import { HttpResponse } from '@interfaces/http-response.interface';
+import { IHttpResponse } from '@interfaces/http-response.interface';
 import { ArgumentsHost, ExceptionFilter } from '@nestjs/common';
 import { convertString2JSON } from '@utils/string.utils';
 
@@ -26,7 +26,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const data = convertString2JSON(message);
 
-    let response: HttpResponse<null> = null;
+    let response: IHttpResponse<null> = null;
 
     response = {
       data: null,

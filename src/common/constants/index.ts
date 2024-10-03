@@ -1,3 +1,7 @@
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 export const PASSWORD_REGEX =
   /^(?:[0-9]+[a-z!@#$%^&*()]|[a-z!@#$%^&*()]+[0-9])[a-z0-9!@#$%^&*()]*$/i;
 
@@ -22,7 +26,7 @@ export const SQL_REGEX = [
 ];
 
 export const DATABASE = {
-  USER: process.env.DB_USER || '',
+  USER: process.env.DB_USERNAME || '',
   PASSWORD: process.env.DB_PASSWORD || '',
   HOST: process.env.DB_HOST || '',
   PORT: parseInt(process.env.DB_PORT) || 6543,

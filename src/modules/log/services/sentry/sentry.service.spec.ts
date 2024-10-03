@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { SentryService } from './sentry.service';
 
 describe('SentryService', () => {

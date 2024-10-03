@@ -1,7 +1,8 @@
-import { UNKNOW_EXIT_CODE } from '@constants/enums/error-code.enum';
-import { BaseErrorMassage } from '@constants/enums/error-message.enum';
 import { IHttpPagingResponse } from '@interfaces/http-paging-response.interface';
 import { IHttpResponse } from '@interfaces/http-response.interface';
+
+import { UNKNOW_EXIT_CODE } from '@constants/enums/error-code.enum';
+import { BaseErrorMassage } from '@constants/enums/error-message.enum';
 
 export const returnObjects = <T>(
   data: T | T[] | null,

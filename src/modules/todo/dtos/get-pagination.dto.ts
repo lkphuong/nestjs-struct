@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { generateValidationMessage } from '@utils/index';
-import { MinValidator } from 'src/common/validators/min.validator';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
+import { MinValidator } from 'src/common/validators/min.validator';
 
 export class GetPaginationDto {
   @ApiProperty({
@@ -14,7 +14,6 @@ export class GetPaginationDto {
     message: (args) =>
       generateValidationMessage(args, 'Trang hiện tại không được để trống'),
   })
-  @Transform(({ value }) => parseInt(value))
   @MinValidator(1, {
     message: (args) =>
       generateValidationMessage(
@@ -22,6 +21,7 @@ export class GetPaginationDto {
         'Trang hiện tại phải lớn hơn hoặc bằng 1',
       ),
   })
+  @Transform(({ value }) => parseInt(value))
   page: number;
 
   @ApiProperty({
@@ -36,7 +36,6 @@ export class GetPaginationDto {
         'Số lượng bản ghi trên mỗi trang không được để trống',
       ),
   })
-  @Transform(({ value }) => parseInt(value))
   @MinValidator(1, {
     message: (args) =>
       generateValidationMessage(
@@ -44,5 +43,6 @@ export class GetPaginationDto {
         'Số lượng bản ghi trên mỗi trang phải lớn hơn hoặc bằng 1',
       ),
   })
+  @Transform(({ value }) => parseInt(value))
   limit: number;
 }

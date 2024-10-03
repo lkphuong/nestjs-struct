@@ -1,12 +1,9 @@
-import { Repository } from 'typeorm';
+import { TodoEntity } from '@entities/todo.entity';
+import { GetPaginationDto } from '@modules/todo/dtos/get-pagination.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
-import { TodoEntity } from '@entities/todo.entity';
-
-import { GetPaginationDto } from '@modules/todo/dtos/get-pagination.dto';
-
 import { catchErrService } from '@utils/error.util';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TodoService {
@@ -44,6 +41,49 @@ export class TodoService {
     } catch (error) {
       catchErrService('TodoService.count', error);
       return null;
+    }
+  }
+
+  async getTodoById(id: number): Promise<TodoEntity | null> {
+    try {
+      const todo = await this.todoRepository.findOne({
+        where: {
+          id,
+          deleted: false,
+        },
+      });
+
+      return todo;
+    } catch (error) {
+      catchErrService('TodoService.getTodoById', error);
+      return null;
+    }
+  }
+
+  async save(todo: TodoEntity): Promise<TodoEntity | null> {
+    try {
+      const newTodo = await this.todoRepository.save(todo);
+
+      return newTodo;
+    } catch (error) {
+      catchErrService('TodoService.create', error);
+      return null;
+    }
+  }
+
+  async deleteTodoById(id: number): Promise<boolean> {
+    try {
+      await this.todoRepository.update(
+        { id, deleted: false },
+        {
+          deleted: true,
+        },
+      );
+
+      return true;
+    } catch (error) {
+      catchErrService('TodoService.deleteTodoById', error);
+      return false;
     }
   }
 }

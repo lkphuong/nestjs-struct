@@ -3,6 +3,8 @@ export const PASSWORD_REGEX =
 
 export const MOBILE_REGEX = /^[0-9]{10,11}$/;
 
+export const NUMBER_REGEX = /^\d+$/;
+
 export const SQL_KEYWORD_REGEX =
   /(\b(SELECT|UPDATE|DELETE|INSERT|FROM|WHERE|DROP|ALTER)\b)/i;
 
@@ -20,13 +22,22 @@ export const SQL_REGEX = [
 ];
 
 export const DATABASE = {
-  USER: process.env.DB_USER || 'root',
-  PASSWORD: process.env.DB_PASSWORD || 'root',
-  HOST: process.env.DB_HOST || 'localhost',
-  PORT: parseInt(process.env.DB_PORT) || 3306,
-  NAME: process.env.DB_DATABASE || 'test',
-  TYPE: process.env.DB_DATABASE_TYPE || 'mysql',
+  USER: process.env.DB_USER || '',
+  PASSWORD: process.env.DB_PASSWORD || '',
+  HOST: process.env.DB_HOST || '',
+  PORT: parseInt(process.env.DB_PORT) || 6543,
+  NAME: process.env.DB_DATABASE || '',
+  TYPE: process.env.DB_DATABASE_TYPE || '',
 };
+
+export const JWT = {
+  SECRET: process.env.JWT_SECRET || 'exampleSecret',
+  EXPIRES_IN: process.env.JWT_EXPIRES_IN || '1d',
+};
+
+export const SALT = parseInt(process.env.SALT) || 10;
+
+export const IS_PUBLIC_KEY = process.env.IS_PUBLIC_KEY || 'isPublic';
 
 export const ROLES_KEY = process.env.ROLES_KEY || 'exampleRoles';
 

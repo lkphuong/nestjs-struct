@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mssql',
+      type: 'postgres',
       host: DATABASE.HOST,
       port: DATABASE.PORT,
       database: DATABASE.NAME,
@@ -13,10 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: DATABASE.PASSWORD,
       maxQueryExecutionTime: 3000,
       autoLoadEntities: true,
-      synchronize: false,
-      options: {
-        encrypt: false,
-      },
+      synchronize: true,
     }),
   ],
 })

@@ -3,8 +3,8 @@ import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 export class BaseEntity {
   @CreateDateColumn({
     name: 'created_at',
-    type: 'datetime',
-    default: () => 'getdate()',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
 
@@ -18,7 +18,7 @@ export class BaseEntity {
 
   @UpdateDateColumn({
     name: 'updated_at',
-    type: 'datetime',
+    type: 'timestamp',
     nullable: true,
   })
   updatedAt: Date;
@@ -33,7 +33,7 @@ export class BaseEntity {
 
   @Column({
     name: 'deleted_at',
-    type: 'datetime',
+    type: 'timestamp',
     nullable: true,
   })
   deletedAt: Date;
@@ -47,7 +47,7 @@ export class BaseEntity {
   deletedBy: string;
 
   @Column({
-    name: 'deleted_at',
+    name: 'deleted',
     type: 'boolean',
     nullable: true,
     default: false,

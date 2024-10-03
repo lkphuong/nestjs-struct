@@ -1,5 +1,6 @@
 import { IHttpResponse } from '@interfaces/http-response.interface';
 import { ArgumentsHost, ExceptionFilter } from '@nestjs/common';
+import { writeLog } from '@utils/log.utils';
 import { convertString2JSON } from '@utils/string.utils';
 
 import {
@@ -34,6 +35,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message: Object.keys(data).length > 0 ? null : message,
       errors: Object.keys(data).length > 0 ? data : null,
     };
+
+    writeLog(
+      ctx.getRequest().url,
+      message ? message : Object.keys(data).length > 0 ? data : null,
+    );
 
     return res.status(status).json(response);
   }

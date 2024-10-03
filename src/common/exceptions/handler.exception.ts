@@ -10,9 +10,10 @@ export class HandlerException extends HttpException {
   ) {
     super(
       {
-        exitCode: errorCode ?? 0,
+        status_code: errorCode ?? 0,
         message: message ?? `Internal Server Error.`,
         data: null,
+        errors: null,
       },
       status || HttpStatus.BAD_REQUEST,
     );

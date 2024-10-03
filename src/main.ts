@@ -1,15 +1,15 @@
+import { ValidationPipe } from '@nestjs/common';
 import {
   BaseExceptionFilter,
   HttpAdapterHost,
   NestFactory,
 } from '@nestjs/core';
-
-import * as morgan from 'morgan';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as Sentry from '@sentry/nestjs';
+import * as morgan from 'morgan';
 
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,8 +21,13 @@ async function bootstrap() {
     methods: ['GET, POST, PUT, DELETE'],
   });
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
+
   app.setGlobalPrefix('api');
-  app.useGlobalFilters(new HttpExceptionFilter());
 
   const { httpAdapter } = app.get(HttpAdapterHost);
   Sentry.setupNestErrorHandler(app, new BaseExceptionFilter(httpAdapter));
@@ -36,6 +41,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('document', app, document);
 
-  await app.listen(3000);
+  app.useGlobalFilters(new HttpExceptionFilter());
+
+  await app.listen(4000);
+
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

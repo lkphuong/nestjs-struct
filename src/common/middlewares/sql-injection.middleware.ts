@@ -1,8 +1,9 @@
-import { VALIDATION_EXIT_CODE } from '@constants/enums/error-code.enum';
-import { HandlerException } from '@exceptions/HandlerException';
+import { HandlerException } from '@exceptions/handler.exception';
 import { HttpException, Injectable } from '@nestjs/common';
 import { catchErrService } from '@utils/error.util';
 import { validateInputObject } from '@utils/injection';
+
+import { VALIDATION_EXIT_CODE } from '@constants/enums/error-code.enum';
 
 @Injectable()
 export class SqlInjectionMiddleware {

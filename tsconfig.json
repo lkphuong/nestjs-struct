@@ -25,7 +25,10 @@
       "@factories/*": ["src/factories/*"],
       "@modules/*": ["src/modules/*"],
       "@utils/*": ["src/utils/*"],
-      "@validators/*": ["src/common/validators/*"]
+      "@validators/*": ["src/common/validators/*"],
+      "@config/*": ["src/configs/*"],
+      "@decorator/*": ["src/common/decorators/*"],
+      "@guards/*": ["src/common/guards/*"],
     }
   }
 }

@@ -1,12 +1,10 @@
+import { HandlerException } from '@exceptions/handler.exception';
+import { returnObjectsWithPaging } from '@utils/response';
 import { Request } from 'express';
 
-import { TodoService } from '../services/todo/todo.service';
-
 import { GetPaginationDto } from '../dtos/get-pagination.dto';
-
-import { HandlerException } from '@exceptions/HandlerException';
-
-import { returnObjectsWithPaging } from '@utils/response';
+import { ITodoResponse } from '../interfaces';
+import { TodoService } from '../services/todo/todo.service';
 
 import { DATABASE_EXIT_CODE } from '@constants/enums/error-code.enum';
 import { BaseErrorMassage } from '@constants/enums/error-message.enum';
@@ -32,11 +30,11 @@ export const getTodoPagination = async (
   const totalPage = Math.ceil(count / param.limit);
 
   const todosFormatted = todos.map((todo) => {
-    return {
+    return <ITodoResponse>{
       id: todo.id,
       title: todo.title,
-      createdAt: todo.createdAt,
-      updatedAt: todo.updatedAt,
+      description: todo.description,
+      created_at: todo.createdAt,
     };
   });
 

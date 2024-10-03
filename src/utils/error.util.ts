@@ -1,10 +1,11 @@
+import { HandlerException } from '@exceptions/handler.exception';
 import { HttpException } from '@nestjs/common';
 import * as Sentry from '@sentry/nestjs';
 import { Request } from 'express';
 
 import { writeLog } from './log.utils';
+
 import { SERVER_EXIT_CODE } from '@constants/enums/error-code.enum';
-import { HandlerException } from '@exceptions/HandlerException';
 
 export const catchErrService = (path: string, err: any) => {
   console.log(err);

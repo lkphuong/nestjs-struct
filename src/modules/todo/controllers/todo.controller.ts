@@ -1,4 +1,4 @@
-import { Roles } from '@decorator/roles.decorator';
+import { Public, Roles } from '@decorator/roles.decorator';
 import { TodoEntity } from '@entities/todo.entity';
 import { HandlerException } from '@exceptions/handler.exception';
 import {
@@ -12,12 +12,15 @@ import {
   Put,
   Query,
   Req,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ParseNumberPipe } from '@pipes/parse-number.pipe';
 import { catchErrController } from '@utils/error.util';
 import { returnObjects } from '@utils/response';
 import { Request } from 'express';
-import { ParseNumberPipe } from 'src/common/pipes/parse-number.pipe';
 
 import { CreateTodoDto } from '../dtos/create.dto';
 import { GetPaginationDto } from '../dtos/get-pagination.dto';
@@ -36,7 +39,7 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @ApiOperation({ summary: 'Lấy danh sách todos phân trang' })
-  @Roles(ROLE.USER)
+  @Public()
   @Get()
   async getTodoPagination(
     @Query() param: GetPaginationDto,
@@ -56,6 +59,7 @@ export class TodoController {
   }
 
   @ApiOperation({ summary: 'Xem chi tiết todo' })
+  @Roles(ROLE.ADMIN, ROLE.USER)
   @Get(':id')
   async getTodoById(
     @Param('id', ParseNumberPipe) id: number,
@@ -107,6 +111,26 @@ export class TodoController {
       }
 
       return returnObjects({ id: newTodo.id });
+    } catch (error) {
+      catchErrController(error, req);
+    }
+  }
+
+  @Public()
+  @ApiOperation({ summary: 'Upload file' })
+  @UseInterceptors(FileInterceptor('file'))
+  @Post('upload')
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Req() req: Request,
+  ) {
+    try {
+      const { originalname, filename, destination } = file;
+
+      console.log('destination', destination);
+      console.log('file: ', file);
+
+      return returnObjects({ originalname, filename });
     } catch (error) {
       catchErrController(error, req);
     }

@@ -6,6 +6,7 @@ import {
 } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as Sentry from '@sentry/nestjs';
+import helmet from 'helmet';
 import * as morgan from 'morgan';
 
 import { AppModule } from './app.module';
@@ -20,6 +21,8 @@ async function bootstrap() {
     credentials: true,
     methods: ['GET, POST, PUT, DELETE'],
   });
+
+  app.use(helmet());
 
   app.useGlobalPipes(
     new ValidationPipe({

@@ -22,13 +22,14 @@
       "@entities/*": ["src/common/entities/*"],
       "@exceptions/*": ["src/common/exceptions/*"],
       "@interfaces/*": ["src/common/interfaces/*"],
-      "@factories/*": ["src/factories/*"],
+      "@factories/*": ["src/common/factories/*"],
       "@modules/*": ["src/modules/*"],
       "@utils/*": ["src/utils/*"],
       "@validators/*": ["src/common/validators/*"],
       "@config/*": ["src/configs/*"],
       "@decorator/*": ["src/common/decorators/*"],
       "@guards/*": ["src/common/guards/*"],
+      "@pipes/*": ["src/common/pipes/*"],
     }
   }
 }
